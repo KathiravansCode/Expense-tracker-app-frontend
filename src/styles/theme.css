@@ -1,0 +1,30 @@
+:root {
+  --bg: 255 255 255;
+  --fg: 17 24 39;
+  --muted: 107 114 128;
+  --card: 255 255 255;
+  --border: 229 231 235;
+  --primary: 16 185 129;
+  --primary-fg: 4 44 32;
+  --danger: 239 68 68;
+  --shadow: 15 23 42;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  color: rgb(var(--fg));
+  background:
+    radial-gradient(1000px 600px at 10% 0%, rgba(var(--primary) / 0.14), transparent 60%),
+    radial-gradient(900px 500px at 90% 10%, rgba(56 189 248 / 0.14), transparent 60%),
+    linear-gradient(to bottom, rgb(var(--bg)), rgb(var(--bg)));
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
