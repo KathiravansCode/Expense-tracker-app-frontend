@@ -1,7 +1,9 @@
+import { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { FiBarChart2, FiBell, FiCreditCard, FiGrid, FiLogOut, FiTag, FiUser } from 'react-icons/fi'
 import { cn } from '../../utils/cn'
 import { useAuth } from '../../context/AuthContext'
+import { useApp } from '../../context/AppContext'
 
 const nav = [
   { to: '/', label: 'Dashboard', icon: FiGrid, end: true },
@@ -14,6 +16,13 @@ const nav = [
 
 export default function Sidebar() {
   const { logout } = useAuth()
+  const { alertsMeta, refreshAlertsMeta } = useApp()
+
+  useEffect(() => {
+    refreshAlertsMeta().catch(() => {})
+    const id = window.setInterval(() => refreshAlertsMeta().catch(() => {}), 30000)
+    return () => window.clearInterval(id)
+  }, [refreshAlertsMeta])
 
   return (
     <aside className="sticky top-4 hidden h-[calc(100vh-2rem)] w-64 shrink-0 rounded-2xl border border-gray-200 bg-white/80 p-3 shadow-sm backdrop-blur lg:block">
@@ -41,7 +50,12 @@ export default function Sidebar() {
               )
             }
           >
-            <item.icon className="size-4" />
+            <span className="relative inline-flex">
+              <item.icon className="size-4" />
+              {item.to === '/alerts' && alertsMeta?.hasUnread ? (
+                <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-red-500 ring-2 ring-white" />
+              ) : null}
+            </span>
             {item.label}
           </NavLink>
         ))}
@@ -60,4 +74,3 @@ export default function Sidebar() {
     </aside>
   )
 }
-

@@ -12,6 +12,7 @@ import { formatMoney } from '../../utils/format'
 import SpendingTrendChart from '../../components/charts/SpendingTrendChart'
 import CategoryBreakdownChart from '../../components/charts/CategoryBreakdownChart'
 import { config } from '../../config'
+import DashboardFilters from '../../components/dashboard/DashboardFilters'
 
 function StatCard({ label, value, icon, tone }) {
   const toneCls =
@@ -102,6 +103,10 @@ export default function DashboardPage() {
           </Button>
         }
       />
+
+      <Card>
+        <DashboardFilters />
+      </Card>
 
       {loading ? (
         <Card className="flex items-center gap-3">

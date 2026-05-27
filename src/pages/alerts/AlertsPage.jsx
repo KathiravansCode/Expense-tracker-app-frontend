@@ -3,6 +3,7 @@ import toast from 'react-hot-toast'
 import { FiCheck, FiInfo } from 'react-icons/fi'
 import { apiRequest } from '../../api/http'
 import { useAuth } from '../../context/AuthContext'
+import { useApp } from '../../context/AppContext'
 import Card from '../../components/ui/Card'
 import PageHeader from '../../components/layout/PageHeader'
 import Button from '../../components/ui/Button'
@@ -18,6 +19,7 @@ function alertTone(type) {
 
 export default function AlertsPage() {
   const { token } = useAuth()
+  const { refreshAlertsMeta } = useApp()
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(null)
 
@@ -29,6 +31,7 @@ export default function AlertsPage() {
         query: { page: 0, size: 20, sort: 'createdAt,desc' },
       })
       setPage(payload)
+      refreshAlertsMeta().catch(() => {})
     } catch (err) {
       toast.error(err?.message || 'Failed to load alerts')
     } finally {
@@ -64,17 +67,6 @@ export default function AlertsPage() {
           </Button>
         }
       />
-
-      <Card className="text-sm text-gray-600">
-        <div className="flex items-start gap-2">
-          <FiInfo className="mt-0.5 shrink-0" />
-          <div>
-            Real-time alerts use SSE at `GET /api/alerts/subscribe`. Browser `EventSource` can’t attach the required
-            `Authorization: Bearer …` header; for real-time to work, serve frontend behind a proxy / same-origin auth,
-            or update backend to accept token via cookie or query param.
-          </div>
-        </div>
-      </Card>
 
       {loading ? (
         <Card className="flex items-center gap-3">
@@ -115,4 +107,3 @@ export default function AlertsPage() {
     </div>
   )
 }
-

@@ -15,9 +15,6 @@ export default function AuthLayout({ title, subtitle, children, footer }) {
               <div className="mt-6 text-3xl font-semibold leading-tight">
                 Track income, expenses, budgets — with a clean, modern dashboard.
               </div>
-              <div className="mt-3 text-sm text-gray-600">
-                Built to pair with your Spring Boot + PostgreSQL backend (JWT auth, analytics, budgets, export).
-              </div>
 
               <div className="mt-8 grid grid-cols-2 gap-3 text-sm">
                 <div className="rounded-2xl border border-gray-200 bg-white/70 p-4">
@@ -37,9 +34,6 @@ export default function AuthLayout({ title, subtitle, children, footer }) {
                   <div className="mt-1 text-gray-600">Download monthly CSV.</div>
                 </div>
               </div>
-            </div>
-            <div className="mt-4 text-xs text-gray-500">
-              Tip: set `VITE_API_BASE_URL` in `.env` to point to your backend.
             </div>
           </div>
 
@@ -64,4 +58,3 @@ export default function AuthLayout({ title, subtitle, children, footer }) {
     </div>
   )
 }
-
