@@ -41,11 +41,15 @@ export function AuthProvider({ children }) {
     toast.success('Account created. Please login.')
   }, [])
 
+  // ── Forgot Password ───────────────────────────────────────────
+  // Backend no longer returns the reset token in the response body.
+  // It sends it via email and returns only a generic success message.
+  // We validate success with unwrapApiResponse (throws on failure),
+  // then surface payload.message so the UI can display it to the user.
   const forgotPassword = useCallback(async ({ email }) => {
     const payload = await apiRequest('/api/auth/forgot-password', { method: 'POST', body: { email } })
-    const data = unwrapApiResponse(payload)
-    // Backend returns: { resetToken: "..." }
-    return data
+    unwrapApiResponse(payload) // throws ApiError if success === false
+    return { message: payload?.message }
   }, [])
 
   const resetPassword = useCallback(async ({ token: resetToken, newPassword }) => {
