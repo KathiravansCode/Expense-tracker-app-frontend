@@ -5,7 +5,7 @@ import { monthYearLabel } from '../../utils/format'
 import { useApp } from '../../context/AppContext'
 import Button from '../ui/Button'
 
-export default function TopBar() {
+export default function TopBar({ onMenuClick }) {
   const { user } = useAuth()
   const { ui } = useApp()
 
@@ -22,7 +22,13 @@ export default function TopBar() {
       </div>
 
       <div className="flex items-center gap-2">
-        <Button variant="ghost" className="lg:hidden" aria-label="Menu" icon={<FiMenu />} />
+        <Button
+          variant="ghost"
+          className="lg:hidden"
+          aria-label="Menu"
+          icon={<FiMenu />}
+          onClick={onMenuClick}
+        />
         <Button
           to="/transactions"
           variant="primary"
@@ -36,4 +42,3 @@ export default function TopBar() {
     </div>
   )
 }
-
