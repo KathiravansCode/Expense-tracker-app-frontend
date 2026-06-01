@@ -34,9 +34,9 @@ export default function LoginPage() {
       subtitle="Login to continue to your dashboard."
       footer={
         <div className="flex items-center justify-between text-sm">
-          <Link to="/forgot-password" className="font-medium text-emerald-700 hover:text-emerald-600">
+          {/* <Link to="/forgot-password" className="font-medium text-emerald-700 hover:text-emerald-600">
             Forgot password?
-          </Link>
+          </Link> */}
           <Link to="/register" className="font-medium text-gray-900 hover:text-gray-700">
             Create account
           </Link>
